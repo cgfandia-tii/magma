@@ -78,3 +78,5 @@ fi
 echo "Campaign terminated at $(date '+%F %R')"
 
 kill $(jobs -p)
+
+chown -R magma:magma "$SHARED"

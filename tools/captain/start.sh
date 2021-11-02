@@ -47,19 +47,19 @@ if [ ! -z "$ENTRYPOINT" ]; then
 fi
 
 if [ ! -z "$SHARED" ]; then
-    SHARED="$(realpath "$SHARED")"
+    #SHARED="$(realpath "$SHARED")"
     flag_volume="--volume=$SHARED:/magma_shared"
 fi
 
 if [ -t 1 ]; then
-    docker run -it $flag_volume \
+    docker run -it $flag_volume -u root:root \
         --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
         --env=PROGRAM="$PROGRAM" --env=ARGS="$ARGS" \
         --env=FUZZARGS="$FUZZARGS" --env=POLL="$POLL" --env=TIMEOUT="$TIMEOUT" \
         $flag_aff $flag_ep "$IMG_NAME"
 else
     container_id=$(
-    docker run -dt $flag_volume \
+    docker run -dt $flag_volume -u root:root \
         --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
         --env=PROGRAM="$PROGRAM" --env=ARGS="$ARGS" \
         --env=FUZZARGS="$FUZZARGS" --env=POLL="$POLL" --env=TIMEOUT="$TIMEOUT" \
