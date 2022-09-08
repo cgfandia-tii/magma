@@ -7,9 +7,12 @@
 # - env TARGET: path to target work dir
 # - env OUT: path to directory where artifacts are stored
 # - env SHARED: path to directory shared with host (to store results)
+# - env PIPELINE_ID: fuzzing pipeline identifier
 # - env PROGRAM: name of program to run (should be found in $OUT)
 # - env ARGS: extra arguments to pass to the program
 ##
+
+SHARED="$SHARED/$PIPELINE_ID"
 
 find_triggered()
 {

@@ -6,6 +6,7 @@
 # - env TARGET: path to target work dir
 # - env OUT: path to directory where artifacts are stored
 # - env SHARED: path to directory shared with host (to store results)
+# - env PIPELINE_ID: fuzzing pipeline identifier
 # - env PROGRAM: name of program to run (should be found in $OUT)
 # - env ARGS: extra arguments to pass to the program
 # - env FUZZARGS: extra arguments to pass to the fuzzer
@@ -14,6 +15,8 @@
 # - env MAGMA: path to Magma support files
 # + env LOGSIZE: size (in bytes) of log file to generate (default: 1 MiB)
 ##
+
+SHARED="$SHARED/$PIPELINE_ID"
 
 # set default max log size to 1 MiB
 LOGSIZE=${LOGSIZE:-$[1 << 20]}

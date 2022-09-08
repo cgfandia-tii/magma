@@ -11,6 +11,7 @@
 # - env TIMEOUT: time to run the campaign
 # + env SHARED: path to host-local volume where fuzzer findings are saved
 #       (default: no shared volume)
+# + env PIPELINE_ID: fuzzing pipeline identifier
 # + env AFFINITY: the CPU to bind the container to (default: no affinity)
 # + env ENTRYPOINT: a custom entry point to launch in the container (default:
 #       $MAGMA/run.sh)
@@ -54,14 +55,14 @@ fi
 if [ -t 1 ]; then
     docker run -it $flag_volume -u root:root \
         --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
-        --env=PROGRAM="$PROGRAM" --env=ARGS="$ARGS" \
+        --env=PROGRAM="$PROGRAM" --env=ARGS="$ARGS" --env=PIPELINE_ID="$PIPELINE_ID" \
         --env=FUZZARGS="$FUZZARGS" --env=POLL="$POLL" --env=TIMEOUT="$TIMEOUT" \
         $flag_aff $flag_ep "$IMG_NAME"
 else
     container_id=$(
     docker run -dt $flag_volume -u root:root \
         --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
-        --env=PROGRAM="$PROGRAM" --env=ARGS="$ARGS" \
+        --env=PROGRAM="$PROGRAM" --env=ARGS="$ARGS" --env=PIPELINE_ID="$PIPELINE_ID" \
         --env=FUZZARGS="$FUZZARGS" --env=POLL="$POLL" --env=TIMEOUT="$TIMEOUT" \
         --network=none \
         $flag_aff $flag_ep "$IMG_NAME"
