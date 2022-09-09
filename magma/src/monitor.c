@@ -272,7 +272,10 @@ int main(int argc, char **argv)
     data_t data;
     if (fetch_itm == NULL || \
             strcmp(fetch_itm->value, fetch_itm->def->dflt) == 0) {
-        const char *fname = NAME;
+        const char *fname = getenv("MAGMA_STORAGE");
+        if (fname == NULL) {
+            fname = NAME;
+        }
         if (argc > 0) {
             fname = argv[0];
         }

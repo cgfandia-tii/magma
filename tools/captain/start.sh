@@ -48,7 +48,6 @@ if [ ! -z "$ENTRYPOINT" ]; then
 fi
 
 if [ ! -z "$SHARED" ]; then
-    #SHARED="$(realpath "$SHARED")"
     flag_volume="--volume=$SHARED:/magma_shared"
 fi
 

@@ -17,6 +17,7 @@
 ##
 
 SHARED="$SHARED/$PIPELINE_ID"
+export MAGMA_STORAGE="$SHARED/canaries.raw"
 
 # set default max log size to 1 MiB
 LOGSIZE=${LOGSIZE:-$[1 << 20]}

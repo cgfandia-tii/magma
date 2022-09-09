@@ -19,7 +19,7 @@ trap cleanup EXIT
 IMG_NAME="magma/$FUZZER/$TARGET"
 
 container_id=$(
-docker run -dt --entrypoint bash --volume=`realpath "$SHARED"`:/magma_shared \
+docker run -dt --entrypoint bash --volume=$SHARED:/magma_shared \
     --env=PROGRAM="$PROGRAM" --env=ARGS="$ARGS" \
     "$IMG_NAME"
 )
